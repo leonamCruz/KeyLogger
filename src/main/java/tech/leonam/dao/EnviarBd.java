@@ -7,7 +7,7 @@ public class EnviarBd {
     private static final String SQL_CADASTRO = "INSERT INTO dados(recebidos) values (?)";
 
     public EnviarBd(String texto) {
-        new Thread(() -> enviar(texto)).start();
+        new Thread(() -> enviar(new AnaliseTexto().trocas(texto))).start();
     }
 
     private void enviar(String texto) {

