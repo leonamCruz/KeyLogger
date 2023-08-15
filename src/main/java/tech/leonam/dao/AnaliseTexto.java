@@ -1,29 +1,6 @@
 package tech.leonam.dao;
 
 public class AnaliseTexto {
-    /*
-
-
-    public static final String[] ESPECIAIS = {
-            "backspace",
-            "up",
-            "down",
-            "right",
-            "left",
-            "tab",
-            "enter",
-            "esc",
-            "comma",
-            "shift",
-            "quote",
-            "alt",
-            "back",
-            "ctrl",
-            "quoteback",
-            "space",
-            "semicolon"
-    };
- */
 
     public String trocas(String aSerEnviado) {
         var retorno = aSerEnviado;
